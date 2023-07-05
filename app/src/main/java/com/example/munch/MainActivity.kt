@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -28,6 +30,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.munch.ui.theme.MunchTheme
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Pageview
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Sort
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.ui.res.stringResource
 
 
 class MainActivity : ComponentActivity() {
@@ -103,6 +117,43 @@ fun Search(modifier: Modifier = Modifier) {
             }
         }
     }
+
+@Composable
+fun ChipSort(modifier: Modifier = Modifier, @StringRes text : Int){
+    AssistChip(
+        onClick = { /*TODO*/ },
+        label = { Text(text = stringResource(text),
+                       style = MaterialTheme.typography.labelLarge
+            )
+                },
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Default.Sort,
+                contentDescription = "Sort Icon",
+                Modifier.size(AssistChipDefaults.IconSize)
+            )
+        },
+        modifier = Modifier
+            .widthIn(min = 97.dp)
+            .height(32.dp),
+
+        trailingIcon = {
+            Icon(
+                imageVector = Icons.Default.ArrowDropDown,
+                contentDescription = "Sort Icon",
+                Modifier.size(AssistChipDefaults.IconSize)
+            )
+        }
+    )
+}
+
+@Preview
+@Composable
+fun ChipSortPreview(){
+    MunchTheme{
+        ChipSort(modifier = Modifier.padding(10.dp),R.string.homeChip1)
+    }
+}
 
 
 @Preview
