@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Munch</string>
     <string name="homeChip1">Sort</string>
+    <string name="homeChip2">Top Rated</string>
+    <string name="homeChip3">Quick Bites</string>
+    <string name="FoodItem1">Food Item 1</string>
+    <string name="FoodItem2">Food Item 2</string>
+    <string name="FoodItem3">Food Item 3</string>
+    <string name="FoodItem4">Food Item 4</string>
+    <string name="FoodItem5">Food Item 5</string>
+    <string name="FoodItem6">Food Item 6</string>
+    <string name="FoodItem7">Food Item 7</string>
 </resources>
