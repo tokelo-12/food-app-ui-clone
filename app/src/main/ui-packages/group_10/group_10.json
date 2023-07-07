@@ -1,0 +1,89 @@
+{
+  "name": "group_10",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "xdr6iERmEpwSBoun11NabC",
+    "node": "238:1026",
+    "version": "3780730250",
+    "component-id": "4f4ab1cf369bc27bb5b73df6c06e3944815049e6"
+  },
+  "default": "Group 10",
+  "documentation": "Media-CardContainer",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "vector",
+        "id": "container"
+      },
+      {
+        "type": "vector",
+        "id": "media"
+      }
+    ],
+    "modes": {
+      "Group 10": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": "false",
+            "children": [
+              "container",
+              "media"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "container",
+            "border-radius": "16.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "container.svg"
+          },
+          {
+            "id": "media",
+            "margin": {
+              "left": "192.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "media.svg"
+          }
+        ]
+      }
+    }
+  },
+  "previews": [
+    {
+      "design": "Group 10",
+      "size": {
+        "width": 328.0,
+        "height": 136.0
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}
