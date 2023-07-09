@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -29,6 +30,8 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Sort
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -73,10 +76,10 @@ class MainActivity : ComponentActivity() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Search(modifier: Modifier = Modifier) {
+fun Search() {
     var text by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
-    var items = remember  {
+    val items = remember  {
         mutableStateListOf("Burger", "Burrito" )
     }
 
@@ -203,7 +206,10 @@ fun ComponentPair(
     @DrawableRes drawable: Int,
 ){
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .width(80.dp)
+            .height(120.dp)
     ) {
         Image(
             painter = painterResource(drawable),
@@ -215,7 +221,7 @@ fun ComponentPair(
             contentScale = ContentScale.Crop
         )
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
         Text(
             text = stringResource(text),
@@ -238,6 +244,58 @@ fun ComponentPairRow(){
     }
 }
 
+@Composable
+fun OrderNowCard(
+    @DrawableRes drawable: Int,
+) {
+        // Material Components like Button, Card, Switch, etc
+        Card(
+            modifier = Modifier
+                .height(136.dp)
+                .width(328.dp),
+
+        ) {
+            Row(
+                modifier = Modifier.fillMaxSize(),
+            ) {
+
+                Card(
+                    modifier = Modifier
+                        .width(192.dp)
+                        .padding(all = 20.dp)
+                ) {
+                    Column{
+                        Text(text = "PlaceHolder Text here")
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        Button(
+                            onClick = { /*TODO*/ },
+
+                            contentPadding = PaddingValues(horizontal = 24.dp, vertical = 10.dp)
+                        ) {
+                            Text(
+                                text = "Order Now",
+                            )
+                        }
+                    }
+                }
+
+
+                Image(
+                    painter = painterResource(drawable),
+                    contentDescription = "food image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.width(136.dp),
+
+                )
+            }
+
+        }
+
+}
+
+
 private val componentsRowElements = listOf(
     R.drawable.img1_food to R.string.FoodItem1,
 
@@ -259,10 +317,21 @@ data class DrawableStringPair(
     @DrawableRes val drawable: Int,
     @StringRes val text: Int,
 )
+
+@Preview
+@Composable
+fun OrderNowCardPreview(){
+    MunchTheme{
+        OrderNowCard(
+            R.drawable.img8_food
+        )
+    }
+}
+
 @Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 @Composable
 fun ComponentPairRowPreview(){
-    MunchTheme() {
+    MunchTheme{
         ComponentPairRow()
     }
 }
@@ -271,7 +340,7 @@ fun ComponentPairRowPreview(){
 @Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 @Composable
 fun ComponentPairPreview(){
-    MunchTheme() {
+    MunchTheme{
         ComponentPair(R.string.FoodItem1, R.drawable.img1_food,)
     }
 }
