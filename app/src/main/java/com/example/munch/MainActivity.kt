@@ -59,8 +59,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.munch.ui.theme.MunchTheme
 
 
@@ -74,10 +76,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    OrderNowCard(
-                        Modifier.height(136.dp),
-                        R.drawable.img8_food
-                    )
+                    RestaurantCard(R.drawable.img9_food)
                 }
             }
         }
@@ -156,7 +155,9 @@ fun ChipSort(modifier: Modifier = Modifier,
             label = {
                 Text(
                     text = stringResource(text),
-                    style = MaterialTheme.typography.labelLarge
+                    style = TextStyle(
+                        fontSize = 14.sp
+                    )
                 )
             },
             leadingIcon = {
@@ -187,7 +188,9 @@ fun ChipSort(modifier: Modifier = Modifier,
             label = {
                 Text(
                     text = stringResource(chiptext2),
-                    style = MaterialTheme.typography.labelLarge
+                    style = TextStyle(
+                        fontSize = 14.sp
+                    )
                 )
             },
 
@@ -201,7 +204,9 @@ fun ChipSort(modifier: Modifier = Modifier,
             label = {
                 Text(
                     text = stringResource(chiptext3),
-                    style = MaterialTheme.typography.labelLarge
+                    style = TextStyle(
+                        fontSize = 14.sp
+                    )
                 )
             },
 
@@ -288,6 +293,9 @@ fun OrderNowCard(
                         ) {
                             Text(
                                 text = "Order Now",
+                                style = TextStyle(
+                                    fontSize = 12.sp
+                                )
                             )
                         }
                     }
@@ -308,7 +316,7 @@ fun OrderNowCard(
 }
 
 @Composable
-fun RestaurantCard(){
+fun RestaurantCard(@DrawableRes drawable: Int){
     Column(
         modifier = Modifier
             .height(242.dp)
@@ -320,15 +328,25 @@ fun RestaurantCard(){
                 .height(168.dp)
                 .fillMaxWidth()
         ){
+            Image(
+                painter = painterResource(drawable) ,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
 
+            )
         }
         Spacer(modifier = Modifier.height(16.dp))
 
         Row(modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = "Pizza Perfect")
-
+            Text(
+                text = "Pizza Perfect",
+                style = TextStyle(
+                    fontSize = 16.sp
+                )
+            )
             Card(
                 modifier = Modifier
                     .width(44.dp)
@@ -340,7 +358,7 @@ fun RestaurantCard(){
                     modifier = Modifier
                         .fillMaxWidth()
                         .fillMaxHeight()
-                        .padding(horizontal = 8.dp),
+                        .padding(horizontal = 6.dp),
 //                    horizontalArrangement = Arrangement.SpaceBetween,
 
 
@@ -356,7 +374,9 @@ fun RestaurantCard(){
 
                     Text(
                         text = "4.7",
-                        style = MaterialTheme.typography.labelSmall
+                        style = TextStyle(
+                            fontSize = 12.sp
+                        )
                     )
                 }
             }
@@ -376,8 +396,10 @@ fun RestaurantCard(){
 //            Spacer(modifier = Modifier.width(5.dp))
 
             Text(text = "35 min",
-                 style = MaterialTheme.typography.labelSmall
+                style = TextStyle(
+                    fontSize = 12.sp
                 )
+            )
 
 //            Spacer(modifier = Modifier.width(8.dp))
 
@@ -385,7 +407,7 @@ fun RestaurantCard(){
                 imageVector = Icons.Filled.FiberManualRecord,
                 contentDescription = null,
                 modifier = Modifier
-                    .size(4.dp)
+                    .size(2.dp)
             )
 
 //            Spacer(modifier = Modifier.width(8.dp))
@@ -398,8 +420,10 @@ fun RestaurantCard(){
 
 //            Spacer(modifier = Modifier.width(8.dp))
 
-            Text(text = "M12 Deliver Fee",
-                style = MaterialTheme.typography.labelSmall
+            Text(text = "M12 Delivery Fee",
+                style = TextStyle(
+                    fontSize = 12.sp
+                )
             )
 
 //            Spacer(modifier = Modifier.width(8.dp))
@@ -408,13 +432,15 @@ fun RestaurantCard(){
                 imageVector = Icons.Filled.FiberManualRecord,
                 contentDescription = null,
                 modifier = Modifier
-                    .size(4.dp)
+                    .size(2.dp)
             )
 
 //            Spacer(modifier = Modifier.width(8.dp))
 
             Text(text = "M5",
-                style = MaterialTheme.typography.labelSmall
+                style = TextStyle(
+                    fontSize = 12.sp
+                )
             )
         }
     }
@@ -446,7 +472,7 @@ data class DrawableStringPair(
 @Composable
 fun RestaurantCardPreview(){
     MunchTheme{
-        RestaurantCard()
+        RestaurantCard(R.drawable.img9_food)
     }
 }
 
