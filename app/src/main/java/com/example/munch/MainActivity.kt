@@ -7,15 +7,19 @@ import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
@@ -25,9 +29,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.FiberManualRecord
 import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.Motorcycle
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Sort
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.Timelapse
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
@@ -65,7 +74,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Search()
+                    OrderNowCard(
+                        Modifier.height(136.dp),
+                        R.drawable.img8_food
+                    )
                 }
             }
         }
@@ -246,18 +258,18 @@ fun ComponentPairRow(){
 
 @Composable
 fun OrderNowCard(
+    modifier: Modifier,
     @DrawableRes drawable: Int,
+
 ) {
         // Material Components like Button, Card, Switch, etc
         Card(
             modifier = Modifier
                 .height(136.dp)
-                .width(328.dp),
+                .fillMaxWidth(),
 
         ) {
-            Row(
-                modifier = Modifier.fillMaxSize(),
-            ) {
+            Row{
 
                 Card(
                     modifier = Modifier
@@ -284,9 +296,9 @@ fun OrderNowCard(
 
                 Image(
                     painter = painterResource(drawable),
-                    contentDescription = "food image",
+                    contentDescription = "NULL",
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier.width(136.dp),
+                    modifier = modifier,
 
                 )
             }
@@ -295,6 +307,118 @@ fun OrderNowCard(
 
 }
 
+@Composable
+fun RestaurantCard(){
+    Column(
+        modifier = Modifier
+            .height(242.dp)
+            .width(328.dp)
+            .padding(bottom = 10.dp)
+    ) {
+        Card(
+            modifier = Modifier
+                .height(168.dp)
+                .fillMaxWidth()
+        ){
+
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row(modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(text = "Pizza Perfect")
+
+            Card(
+                modifier = Modifier
+                    .width(44.dp)
+                    .height(20.dp),
+
+            ){
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .padding(horizontal = 8.dp),
+//                    horizontalArrangement = Arrangement.SpaceBetween,
+
+
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Star,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(10.dp)
+                    )
+
+//                    Spacer(modifier = Modifier.width(1.dp))
+
+                    Text(
+                        text = "4.7",
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                }
+            }
+        }
+
+
+        Row (
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ){
+            Icon(
+                imageVector = Icons.Filled.Timelapse,
+                contentDescription = "time icon",
+                modifier = Modifier.size(12.dp)
+            )
+            
+//            Spacer(modifier = Modifier.width(5.dp))
+
+            Text(text = "35 min",
+                 style = MaterialTheme.typography.labelSmall
+                )
+
+//            Spacer(modifier = Modifier.width(8.dp))
+
+            Icon(
+                imageVector = Icons.Filled.FiberManualRecord,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(4.dp)
+            )
+
+//            Spacer(modifier = Modifier.width(8.dp))
+
+            Icon(
+                imageVector = Icons.Default.Motorcycle,
+                contentDescription = null,
+                modifier = Modifier.size(14.dp)
+            )
+
+//            Spacer(modifier = Modifier.width(8.dp))
+
+            Text(text = "M12 Deliver Fee",
+                style = MaterialTheme.typography.labelSmall
+            )
+
+//            Spacer(modifier = Modifier.width(8.dp))
+
+            Icon(
+                imageVector = Icons.Filled.FiberManualRecord,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(4.dp)
+            )
+
+//            Spacer(modifier = Modifier.width(8.dp))
+
+            Text(text = "M5",
+                style = MaterialTheme.typography.labelSmall
+            )
+        }
+    }
+}
 
 private val componentsRowElements = listOf(
     R.drawable.img1_food to R.string.FoodItem1,
@@ -318,11 +442,20 @@ data class DrawableStringPair(
     @StringRes val text: Int,
 )
 
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Composable
+fun RestaurantCardPreview(){
+    MunchTheme{
+        RestaurantCard()
+    }
+}
+
 @Preview
 @Composable
 fun OrderNowCardPreview(){
     MunchTheme{
         OrderNowCard(
+            Modifier.height(136.dp),
             R.drawable.img8_food
         )
     }
