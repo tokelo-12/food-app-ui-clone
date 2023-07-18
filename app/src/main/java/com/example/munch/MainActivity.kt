@@ -78,7 +78,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    RestaurantCardColumn()
+                    HomeScreen()
                 }
             }
         }
@@ -143,14 +143,15 @@ fun Search() {
     }
 
 @Composable
-fun ChipSort(modifier: Modifier = Modifier,
+fun ChipSort(
              @StringRes text: Int,
              @StringRes chiptext2: Int,
              @StringRes chiptext3: Int,
 ){
     Row(
-        modifier = modifier,
+        modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
+
     ) {
         AssistChip(
             onClick = { /*TODO*/ },
@@ -254,7 +255,7 @@ fun ComponentPairRow(){
 
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(20.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp),
+//        contentPadding = PaddingValues(horizontal = 16.dp),
         modifier = Modifier.padding(vertical = 8.dp),
     ){
         items(componentsRowElements){item ->
@@ -471,6 +472,28 @@ fun HomeSection(
     }
 }
 
+@Composable
+fun HomeScreen(modifier: Modifier = Modifier){
+    Column(modifier) {
+        Spacer(modifier = Modifier.height(10.dp))
+        Search()
+        Spacer(modifier = Modifier.height(16.dp))
+        ChipSort(
+            R.string.homeChip1,
+            R.string.homeChip2,
+            R.string.homeChip3,
+        )
+        ComponentPairRow()
+        OrderNowCard(
+            Modifier.height(136.dp),
+            R.drawable.img8_food
+        )
+        HomeSection(title = R.string.SlotTitle) {
+            RestaurantCardColumn()
+        }
+    }
+}
+
 
 
 private val componentsRowElements = listOf(
@@ -504,21 +527,29 @@ data class DrawableStringPair(
 
 @Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 @Composable
-fun HomeSectionPreview(){
-    MunchTheme{
-        HomeSection(title = R.string.SlotTitle) {
-            RestaurantCardColumn()
-        }
+fun HomeScreenPreview(){
+    MunchTheme {
+        HomeScreen()
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
-@Composable
-fun RestaurantCardPreview(){
-    MunchTheme{
-        RestaurantCard(R.string.Restaurant4,R.drawable.img9_food)
-    }
-}
+//@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+//@Composable
+//fun HomeSectionPreview(){
+//    MunchTheme{
+//        HomeSection(title = R.string.SlotTitle) {
+//            RestaurantCardColumn()
+//        }
+//    }
+//}
+
+//@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+//@Composable
+//fun RestaurantCardPreview(){
+//    MunchTheme{
+//        RestaurantCard(R.string.Restaurant4,R.drawable.img9_food)
+//    }
+//}
 //
 //@Preview
 //@Composable
@@ -531,13 +562,13 @@ fun RestaurantCardPreview(){
 //    }
 //}
 //
-@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
-@Composable
-fun ComponentPairRowPreview(){
-    MunchTheme{
-        ComponentPairRow()
-    }
-}
+//@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+//@Composable
+//fun ComponentPairRowPreview(){
+//    MunchTheme{
+//        ComponentPairRow()
+//    }
+//}
 //
 //
 //@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
@@ -548,18 +579,18 @@ fun ComponentPairRowPreview(){
 //    }
 //}
 //
-//@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
-//@Composable
-//fun ChipSortPreview(){
-//    MunchTheme{
-//        ChipSort(
-//            modifier = Modifier.padding(10.dp),
-//            R.string.homeChip1,
-//            R.string.homeChip2,
-//            R.string.homeChip3
-//        )
-//    }
-//}
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Composable
+fun ChipSortPreview(){
+    MunchTheme{
+        ChipSort(
+            R.string.homeChip1,
+            R.string.homeChip2,
+            R.string.homeChip3,
+
+        )
+    }
+}
 //
 //
 //@Preview
