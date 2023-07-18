@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -60,6 +61,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -76,7 +78,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    RestaurantCard(R.drawable.img9_food)
+                    RestaurantCardColumn()
                 }
             }
         }
@@ -316,20 +318,24 @@ fun OrderNowCard(
 }
 
 @Composable
-fun RestaurantCard(@DrawableRes drawable: Int){
+fun RestaurantCard(
+    @StringRes text: Int,
+    @DrawableRes drawable: Int
+){
     Column(
         modifier = Modifier
-            .height(242.dp)
-            .width(328.dp)
-            .padding(bottom = 10.dp)
+            .height(256.dp)
+            .fillMaxWidth()
+//            .width(328.dp)
+            .padding(bottom = 22.dp)
     ) {
         Card(
             modifier = Modifier
                 .height(168.dp)
-                .fillMaxWidth()
+                .fillMaxWidth() //inherits width from parent Column i.e 328.dp
         ){
             Image(
-                painter = painterResource(drawable) ,
+                painter = painterResource(drawable),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
@@ -338,11 +344,12 @@ fun RestaurantCard(@DrawableRes drawable: Int){
         }
         Spacer(modifier = Modifier.height(16.dp))
 
-        Row(modifier = Modifier.fillMaxWidth(),
+        Row(
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = "Pizza Perfect",
+                text = stringResource(text),
                 style = TextStyle(
                     fontSize = 16.sp
                 )
@@ -359,7 +366,6 @@ fun RestaurantCard(@DrawableRes drawable: Int){
                         .fillMaxWidth()
                         .fillMaxHeight()
                         .padding(horizontal = 6.dp),
-//                    horizontalArrangement = Arrangement.SpaceBetween,
 
 
                 ) {
@@ -369,8 +375,6 @@ fun RestaurantCard(@DrawableRes drawable: Int){
                         modifier = Modifier
                             .size(10.dp)
                     )
-
-//                    Spacer(modifier = Modifier.width(1.dp))
 
                     Text(
                         text = "4.7",
@@ -385,15 +389,15 @@ fun RestaurantCard(@DrawableRes drawable: Int){
 
         Row (
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.height(20.dp)
         ){
             Icon(
                 imageVector = Icons.Filled.Timelapse,
                 contentDescription = "time icon",
                 modifier = Modifier.size(12.dp)
             )
-            
-//            Spacer(modifier = Modifier.width(5.dp))
+
 
             Text(text = "35 min",
                 style = TextStyle(
@@ -401,16 +405,12 @@ fun RestaurantCard(@DrawableRes drawable: Int){
                 )
             )
 
-//            Spacer(modifier = Modifier.width(8.dp))
-
             Icon(
                 imageVector = Icons.Filled.FiberManualRecord,
                 contentDescription = null,
                 modifier = Modifier
                     .size(2.dp)
             )
-
-//            Spacer(modifier = Modifier.width(8.dp))
 
             Icon(
                 imageVector = Icons.Default.Motorcycle,
@@ -418,15 +418,11 @@ fun RestaurantCard(@DrawableRes drawable: Int){
                 modifier = Modifier.size(14.dp)
             )
 
-//            Spacer(modifier = Modifier.width(8.dp))
-
             Text(text = "M12 Delivery Fee",
                 style = TextStyle(
                     fontSize = 12.sp
                 )
             )
-
-//            Spacer(modifier = Modifier.width(8.dp))
 
             Icon(
                 imageVector = Icons.Filled.FiberManualRecord,
@@ -435,9 +431,7 @@ fun RestaurantCard(@DrawableRes drawable: Int){
                     .size(2.dp)
             )
 
-//            Spacer(modifier = Modifier.width(8.dp))
-
-            Text(text = "M5",
+            Text(text = stringResource(R.string.PlaceHolderDeliveryFee),
                 style = TextStyle(
                     fontSize = 12.sp
                 )
@@ -445,6 +439,39 @@ fun RestaurantCard(@DrawableRes drawable: Int){
         }
     }
 }
+
+@Composable
+fun RestaurantCardColumn(){
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(14.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        contentPadding = PaddingValues(vertical = 10.dp),
+    ){
+        items(restaurantColumnElements){item ->
+            RestaurantCard(text = item.text,drawable = item.drawable)
+        }
+    }
+}
+
+@Composable
+fun HomeSection(
+    @StringRes title: Int,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+){
+    Column(modifier){
+        Text(
+            text = stringResource(title),
+            style = TextStyle(
+                fontSize = 22.sp,
+                fontWeight = FontWeight(500)
+            )
+        )
+        content()
+    }
+}
+
+
 
 private val componentsRowElements = listOf(
     R.drawable.img1_food to R.string.FoodItem1,
@@ -463,6 +490,13 @@ private val componentsRowElements = listOf(
 
 ).map {DrawableStringPair(it.first, it.second)}
 
+private val restaurantColumnElements = listOf(
+    R.drawable.img11_food to R.string.Restaurant3,
+    R.drawable.img13_food to R.string.Restaurant2,
+    R.drawable.img14_food to R.string.Restaurant1,
+    R.drawable.img9_food to R.string.Restaurant4,
+).map{DrawableStringPair(it.first, it.second)}
+
 data class DrawableStringPair(
     @DrawableRes val drawable: Int,
     @StringRes val text: Int,
@@ -470,23 +504,33 @@ data class DrawableStringPair(
 
 @Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 @Composable
+fun HomeSectionPreview(){
+    MunchTheme{
+        HomeSection(title = R.string.SlotTitle) {
+            RestaurantCardColumn()
+        }
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Composable
 fun RestaurantCardPreview(){
     MunchTheme{
-        RestaurantCard(R.drawable.img9_food)
+        RestaurantCard(R.string.Restaurant4,R.drawable.img9_food)
     }
 }
-
-@Preview
-@Composable
-fun OrderNowCardPreview(){
-    MunchTheme{
-        OrderNowCard(
-            Modifier.height(136.dp),
-            R.drawable.img8_food
-        )
-    }
-}
-
+//
+//@Preview
+//@Composable
+//fun OrderNowCardPreview(){
+//    MunchTheme{
+//        OrderNowCard(
+//            Modifier.height(136.dp),
+//            R.drawable.img8_food
+//        )
+//    }
+//}
+//
 @Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 @Composable
 fun ComponentPairRowPreview(){
@@ -494,35 +538,50 @@ fun ComponentPairRowPreview(){
         ComponentPairRow()
     }
 }
+//
+//
+//@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+//@Composable
+//fun ComponentPairPreview(){
+//    MunchTheme{
+//        ComponentPair(R.string.FoodItem1, R.drawable.img1_food,)
+//    }
+//}
+//
+//@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+//@Composable
+//fun ChipSortPreview(){
+//    MunchTheme{
+//        ChipSort(
+//            modifier = Modifier.padding(10.dp),
+//            R.string.homeChip1,
+//            R.string.homeChip2,
+//            R.string.homeChip3
+//        )
+//    }
+//}
+//
+//
+//@Preview
+//@Composable
+//fun SearchBarPreview(){
+//    MunchTheme{
+//        Search()
+//    }
+//}
 
-
-@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
-@Composable
-fun ComponentPairPreview(){
-    MunchTheme{
-        ComponentPair(R.string.FoodItem1, R.drawable.img1_food,)
-    }
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
-@Composable
-fun ChipSortPreview(){
-    MunchTheme{
-        ChipSort(
-            modifier = Modifier.padding(10.dp),
-            R.string.homeChip1,
-            R.string.homeChip2,
-            R.string.homeChip3
-        )
-    }
-}
-
-
-@Preview
-@Composable
-fun SearchBarPreview(){
-    MunchTheme{
-        Search()
-    }
-}
-
+//@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+//@Composable
+//fun RestaurantCardColumnPreview(){
+//    MunchTheme{
+//        RestaurantCardColumn()
+//    }
+//}
+//
+//@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+//@Composable
+//fun TestPreview(){
+//    MunchTheme{
+//        ColumnTest()
+//    }
+//}

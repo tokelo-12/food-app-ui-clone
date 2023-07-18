@@ -10,4 +10,10 @@
     <string name="FoodItem5">Food Item 5</string>
     <string name="FoodItem6">Food Item 6</string>
     <string name="FoodItem7">Food Item 7</string>
+    <string name="Restaurant1">Fly Chicken</string>
+    <string name="Restaurant2">China Town</string>
+    <string name="Restaurant3">Exotic Foods</string>
+    <string name="Restaurant4">Pizza Perfect</string>
+    <string name="PlaceHolderDeliveryFee">M5</string>
+    <string name="SlotTitle">Browse Restaurants</string>
 </resources>
