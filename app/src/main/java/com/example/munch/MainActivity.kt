@@ -7,19 +7,19 @@ import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
@@ -27,17 +27,26 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.FiberManualRecord
 import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Motorcycle
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Sort
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Timelapse
-import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.HourglassEmpty
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Person2
+import androidx.compose.material.icons.outlined.ReceiptLong
+import androidx.compose.material.icons.outlined.RoomService
+import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
@@ -48,6 +57,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -62,7 +72,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.munch.ui.theme.MunchTheme
@@ -97,6 +109,7 @@ fun Search() {
     }
 
         SearchBar(
+            modifier = Modifier.fillMaxWidth(),
             query = text ,
             onQueryChange = {
                 text = it
@@ -150,7 +163,10 @@ fun ChipSort(
 ){
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy
+            (
+            16.dp, Alignment.CenterHorizontally
+        ),
 
     ) {
         AssistChip(
@@ -256,7 +272,7 @@ fun ComponentPairRow(){
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(20.dp),
 //        contentPadding = PaddingValues(horizontal = 16.dp),
-        modifier = Modifier.padding(vertical = 8.dp),
+//        modifier = Modifier.padding(vertical = 8.dp),
     ){
         items(componentsRowElements){item ->
             ComponentPair(text = item.text,drawable = item.drawable)
@@ -266,7 +282,7 @@ fun ComponentPairRow(){
 
 @Composable
 fun OrderNowCard(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     @DrawableRes drawable: Int,
 
 ) {
@@ -284,22 +300,45 @@ fun OrderNowCard(
                         .width(192.dp)
                         .padding(all = 20.dp)
                 ) {
-                    Column{
-                        Text(text = "PlaceHolder Text here")
+                    Column(
+                        modifier = Modifier
+                            .fillMaxHeight(),
+                        horizontalAlignment = Alignment.Start,
+                        verticalArrangement = Arrangement.SpaceBetween,
+                    ){
+                        Text(text = "PlaceHolder Text")
 
-                        Spacer(modifier = Modifier.height(10.dp))
+                        Spacer(modifier = Modifier.heightIn(min = 24.dp))
 
                         Button(
                             onClick = { /*TODO*/ },
 
-                            contentPadding = PaddingValues(horizontal = 24.dp, vertical = 10.dp)
+                            contentPadding = PaddingValues(
+                                horizontal = 24.dp, vertical = 10.dp),
+
+                            modifier = Modifier
+                                .size(height = 36.dp, width = 110.dp)
+
+
                         ) {
-                            Text(
-                                text = "Order Now",
-                                style = TextStyle(
-                                    fontSize = 12.sp
-                                )
-                            )
+
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Text(
+                                    text = "Order Now",
+                                    style = TextStyle(
+                                        fontSize = 12.sp,
+                                        textAlign = TextAlign.Center,
+                                        fontWeight = FontWeight(500),
+                                        lineHeight = 16.sp,
+                                    ),
+
+
+                                    )
+                            }
+
+
                         }
                     }
                 }
@@ -439,14 +478,15 @@ fun RestaurantCard(
             )
         }
     }
+
 }
 
 @Composable
 fun RestaurantCardColumn(){
     LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(14.dp),
+//        verticalArrangement = Arrangement.spacedBy(14.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        contentPadding = PaddingValues(vertical = 10.dp),
+        contentPadding = PaddingValues(top = 14.dp),
     ){
         items(restaurantColumnElements){item ->
             RestaurantCard(text = item.text,drawable = item.drawable)
@@ -475,9 +515,7 @@ fun HomeSection(
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier){
     Column(modifier) {
-        Spacer(modifier = Modifier.height(10.dp))
         Search()
-        Spacer(modifier = Modifier.height(16.dp))
         ChipSort(
             R.string.homeChip1,
             R.string.homeChip2,
@@ -494,6 +532,88 @@ fun HomeScreen(modifier: Modifier = Modifier){
     }
 }
 
+@Composable
+fun MunchBottomNavigation(modifier: Modifier = Modifier){
+    BottomNavigation(modifier) {
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Outlined.Home,
+                    contentDescription = null,
+                )
+            },
+            label = {
+                Text(
+                    text = stringResource(id = R.string.NavHome),
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight(600),
+                        textAlign = TextAlign.Center
+                    )
+                )
+            },
+            selected = true,
+            onClick = { /*TODO*/ }
+        )
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Outlined.RoomService , contentDescription = null,
+                )
+            },
+            label = {
+                Text(
+                    text = stringResource(id = R.string.NavRestaurants),
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight(600),
+                        textAlign = TextAlign.Center
+                    )
+                )
+            },
+            selected = true,
+            onClick = {}
+        )
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Outlined.ReceiptLong , contentDescription = null,
+                )
+            },
+            label = {
+                Text(
+                    text = stringResource(id = R.string.NavOrders),
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight(600),
+                        textAlign = TextAlign.Center
+                    )
+                )
+            },
+            selected = true,
+            onClick = {}
+        )
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Outlined.Person , contentDescription = null,
+                )
+            },
+            label = {
+                Text(
+                    text = stringResource(id = R.string.NavProfile),
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight(600),
+                        textAlign = TextAlign.Center
+                    )
+                )
+            },
+            selected = true,
+            onClick = {}
+        )
+    }
+}
 
 
 private val componentsRowElements = listOf(
@@ -525,13 +645,21 @@ data class DrawableStringPair(
     @StringRes val text: Int,
 )
 
-@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Preview
 @Composable
-fun HomeScreenPreview(){
+fun BottomNavigationPreview(){
     MunchTheme {
-        HomeScreen()
+        MunchBottomNavigation()
     }
 }
+
+//@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+//@Composable
+//fun HomeScreenPreview(){
+//    MunchTheme {
+//        HomeScreen()
+//    }
+//}
 
 //@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 //@Composable
@@ -579,18 +707,18 @@ fun HomeScreenPreview(){
 //    }
 //}
 //
-@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
-@Composable
-fun ChipSortPreview(){
-    MunchTheme{
-        ChipSort(
-            R.string.homeChip1,
-            R.string.homeChip2,
-            R.string.homeChip3,
-
-        )
-    }
-}
+//@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+//@Composable
+//fun ChipSortPreview(){
+//    MunchTheme{
+//        ChipSort(
+//            R.string.homeChip1,
+//            R.string.homeChip2,
+//            R.string.homeChip3,
+//
+//        )
+//    }
+//}
 //
 //
 //@Preview

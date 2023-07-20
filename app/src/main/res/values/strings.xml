@@ -16,4 +16,8 @@
     <string name="Restaurant4">Pizza Perfect</string>
     <string name="PlaceHolderDeliveryFee">M5</string>
     <string name="SlotTitle">Browse Restaurants</string>
+    <string name="NavHome">Home</string>
+    <string name="NavRestaurants">Restaurants</string>
+    <string name="NavOrders">Orders</string>
+    <string name="NavProfile">Profile</string>
 </resources>
