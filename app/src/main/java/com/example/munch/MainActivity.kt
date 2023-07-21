@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,19 +33,15 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.FiberManualRecord
 import androidx.compose.material.icons.filled.History
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Motorcycle
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Sort
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Timelapse
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.HourglassEmpty
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.Person2
 import androidx.compose.material.icons.outlined.ReceiptLong
 import androidx.compose.material.icons.outlined.RoomService
-import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
@@ -57,7 +52,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -74,7 +68,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.munch.ui.theme.MunchTheme
@@ -534,12 +527,16 @@ fun HomeScreen(modifier: Modifier = Modifier){
 
 @Composable
 fun MunchBottomNavigation(modifier: Modifier = Modifier){
-    BottomNavigation(modifier) {
+    BottomNavigation(
+        modifier = modifier,
+    ) {
         BottomNavigationItem(
             icon = {
                 Icon(
                     imageVector = Icons.Outlined.Home,
                     contentDescription = null,
+                    modifier = Modifier
+                        .size(24.dp)
                 )
             },
             label = {
@@ -548,7 +545,9 @@ fun MunchBottomNavigation(modifier: Modifier = Modifier){
                     style = TextStyle(
                         fontSize = 12.sp,
                         fontWeight = FontWeight(600),
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        letterSpacing = 0.5.sp,
+                        lineHeight = 16.sp,
                     )
                 )
             },
@@ -558,7 +557,10 @@ fun MunchBottomNavigation(modifier: Modifier = Modifier){
         BottomNavigationItem(
             icon = {
                 Icon(
-                    imageVector = Icons.Outlined.RoomService , contentDescription = null,
+                    imageVector = Icons.Outlined.RoomService,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(24.dp)
                 )
             },
             label = {
@@ -566,8 +568,10 @@ fun MunchBottomNavigation(modifier: Modifier = Modifier){
                     text = stringResource(id = R.string.NavRestaurants),
                     style = TextStyle(
                         fontSize = 12.sp,
-                        fontWeight = FontWeight(600),
-                        textAlign = TextAlign.Center
+                        fontWeight = FontWeight(500),
+                        textAlign = TextAlign.Center,
+                        letterSpacing = 0.5.sp,
+                        lineHeight = 16.sp,
                     )
                 )
             },
@@ -577,7 +581,10 @@ fun MunchBottomNavigation(modifier: Modifier = Modifier){
         BottomNavigationItem(
             icon = {
                 Icon(
-                    imageVector = Icons.Outlined.ReceiptLong , contentDescription = null,
+                    imageVector = Icons.Outlined.ReceiptLong,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(24.dp)
                 )
             },
             label = {
@@ -585,8 +592,10 @@ fun MunchBottomNavigation(modifier: Modifier = Modifier){
                     text = stringResource(id = R.string.NavOrders),
                     style = TextStyle(
                         fontSize = 12.sp,
-                        fontWeight = FontWeight(600),
-                        textAlign = TextAlign.Center
+                        fontWeight = FontWeight(500),
+                        textAlign = TextAlign.Center,
+                        letterSpacing = 0.5.sp,
+                        lineHeight = 16.sp,
                     )
                 )
             },
@@ -596,7 +605,10 @@ fun MunchBottomNavigation(modifier: Modifier = Modifier){
         BottomNavigationItem(
             icon = {
                 Icon(
-                    imageVector = Icons.Outlined.Person , contentDescription = null,
+                    imageVector = Icons.Outlined.Person,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(24.dp)
                 )
             },
             label = {
@@ -604,8 +616,10 @@ fun MunchBottomNavigation(modifier: Modifier = Modifier){
                     text = stringResource(id = R.string.NavProfile),
                     style = TextStyle(
                         fontSize = 12.sp,
-                        fontWeight = FontWeight(600),
-                        textAlign = TextAlign.Center
+                        fontWeight = FontWeight(500),
+                        textAlign = TextAlign.Center,
+                        letterSpacing = 0.5.sp,
+                        lineHeight = 16.sp,
                     )
                 )
             },
