@@ -14,8 +14,11 @@
     <string name="Restaurant2">China Town</string>
     <string name="Restaurant3">Exotic Foods</string>
     <string name="Restaurant4">Pizza Perfect</string>
-    <string name="PlaceHolderDeliveryFee">M5</string>
+    <string name="Restaurant5">Chicken Wingers</string>
+    <string name="Restaurant6">SeaWorld</string>
+    <string name="PlaceHolderDistance">5 km</string>
     <string name="SlotTitle">Browse Restaurants</string>
+    <string name="SlotTitle2">Recently Viewed</string>
     <string name="NavHome">Home</string>
     <string name="NavRestaurants">Restaurants</string>
     <string name="NavOrders">Orders</string>
