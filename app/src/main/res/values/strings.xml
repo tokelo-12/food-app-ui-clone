@@ -3,6 +3,9 @@
     <string name="homeChip1">Sort</string>
     <string name="homeChip2">Top Rated</string>
     <string name="homeChip3">Quick Bites</string>
+    <string name="homeChip4">Nearby</string>
+    <string name="homeChip5">Halaal</string>
+    <string name="homeChip6">Vegetarian</string>
     <string name="FoodItem1">Food Item 1</string>
     <string name="FoodItem2">Food Item 2</string>
     <string name="FoodItem3">Food Item 3</string>

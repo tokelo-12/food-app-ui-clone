@@ -9,6 +9,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -21,15 +22,21 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.IconToggleButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.ArrowRight
+import androidx.compose.material.icons.filled.ArrowRightAlt
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.FiberManualRecord
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Motorcycle
@@ -61,6 +68,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -162,88 +171,160 @@ fun ChipSort(
              @StringRes text: Int,
              @StringRes chiptext2: Int,
              @StringRes chiptext3: Int,
+             @StringRes chiptext4: Int,
+             @StringRes chiptext5: Int,
+             @StringRes chiptext6: Int
+
 ){
-    Row(
+    LazyRow(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy
             (
-            16.dp, Alignment.CenterHorizontally
+            16.dp, Alignment.Start
         ),
 
     ) {
-        AssistChip(
-            onClick = { /*TODO*/ },
-            label = {
-                Text(
-                    text = stringResource(text),
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        lineHeight = 20.sp,
-                        fontWeight = FontWeight(500),
-                        letterSpacing = 0.1.sp,
+        item {
+            AssistChip(
+                onClick = { /*TODO*/ },
+                label = {
+                    Text(
+                        text = stringResource(text),
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            lineHeight = 20.sp,
+                            fontWeight = FontWeight(500),
+                            letterSpacing = 0.1.sp,
+                        )
                     )
-                )
-            },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Sort,
-                    contentDescription = "Sort Icon",
-                    Modifier.size(AssistChipDefaults.IconSize)
-                )
-            },
-            modifier = Modifier
-                .widthIn(min = 97.dp)
-                .height(32.dp)
-                .align(Alignment.CenterVertically),
-
-
-
-            trailingIcon = {
-                Icon(
-                    imageVector = Icons.Default.ArrowDropDown,
-                    contentDescription = "Sort Icon",
-                    Modifier.size(AssistChipDefaults.IconSize)
-                )
-            }
-        )
-
-        AssistChip(
-            onClick = { /*TODO*/ },
-            label = {
-                Text(
-                    text = stringResource(chiptext2),
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        lineHeight = 20.sp,
-                        fontWeight = FontWeight(500),
-                        letterSpacing = 0.1.sp,
+                },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Sort,
+                        contentDescription = "Sort Icon",
+                        Modifier.size(AssistChipDefaults.IconSize)
                     )
-                )
-            },
+                },
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .height(32.dp),
+//                    .align(Alignment.CenterVertically),
 
-            modifier = Modifier
-                .widthIn(min = 97.dp)
-                .height(32.dp),
-        )
 
-        AssistChip(
-            onClick = { /*TODO*/ },
-            label = {
-                Text(
-                    text = stringResource(chiptext3),
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        lineHeight = 20.sp,
-                        fontWeight = FontWeight(500),
-                        letterSpacing = 0.1.sp,
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.ArrowDropDown,
+                        contentDescription = "Sort Icon",
+                        Modifier.size(AssistChipDefaults.IconSize)
                     )
-                )
-            },
-
-            modifier = Modifier
-                .widthIn(min = 97.dp)
-                .height(32.dp),
+                }
             )
+        }
+
+        item {
+            AssistChip(
+                onClick = { /*TODO*/ },
+                label = {
+                    Text(
+                        text = stringResource(chiptext2),
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            lineHeight = 20.sp,
+                            fontWeight = FontWeight(500),
+                            letterSpacing = 0.1.sp,
+                        )
+                    )
+                },
+
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .height(32.dp),
+            )
+        }
+
+        item {
+            AssistChip(
+                onClick = { /*TODO*/ },
+                label = {
+                    Text(
+                        text = stringResource(chiptext3),
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            lineHeight = 20.sp,
+                            fontWeight = FontWeight(500),
+                            letterSpacing = 0.1.sp,
+                        )
+                    )
+                },
+
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .height(32.dp),
+            )
+        }
+
+        item {
+            AssistChip(
+                onClick = { /*TODO*/ },
+                label = {
+                    Text(
+                        text = stringResource(chiptext4),
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            lineHeight = 20.sp,
+                            fontWeight = FontWeight(500),
+                            letterSpacing = 0.1.sp,
+                        )
+                    )
+                },
+
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .height(32.dp),
+            )
+        }
+
+        item {
+            AssistChip(
+                onClick = { /*TODO*/ },
+                label = {
+                    Text(
+                        text = stringResource(chiptext5),
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            lineHeight = 20.sp,
+                            fontWeight = FontWeight(500),
+                            letterSpacing = 0.1.sp,
+                        )
+                    )
+                },
+
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .height(32.dp),
+            )
+        }
+
+        item {
+            AssistChip(
+                onClick = { /*TODO*/ },
+                label = {
+                    Text(
+                        text = stringResource(chiptext6),
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            lineHeight = 20.sp,
+                            fontWeight = FontWeight(500),
+                            letterSpacing = 0.1.sp,
+                        )
+                    )
+                },
+
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .height(32.dp),
+            )
+        }
     }
 }
 
@@ -256,19 +337,25 @@ fun ComponentPair(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .width(80.dp)
-            .height(120.dp)
+            .height(124.dp)
     ) {
-        Image(
-            painter = painterResource(drawable),
-            contentDescription = null,
+        Card(
             modifier = Modifier
-                .size(80.dp)
-                .clip(RoundedCornerShape(3.dp)),
+                .clip(RoundedCornerShape(3.dp))
+//                .shadow(elevation = 10.dp)
 
-            contentScale = ContentScale.Crop
-        )
+        ) {
+            Image(
+                painter = painterResource(drawable),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(height = 96.dp,width = 80.dp),
 
-        Spacer(modifier = Modifier.height(15.dp))
+                contentScale = ContentScale.Crop
+            )
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
 
         Text(
             text = stringResource(text),
@@ -325,18 +412,17 @@ fun OrderNowCard(
                         Button(
                             onClick = { /*TODO*/ },
 
-                            contentPadding = PaddingValues(
-                                horizontal = 24.dp, vertical = 10.dp),
+                            contentPadding = PaddingValues(top = 10.dp, start = 16.dp,
+                                end = 16.dp, bottom = 10.dp),
 
                             modifier = Modifier
-                                .size(height = 36.dp, width = 110.dp)
+                                .height(36.dp)
+                                .wrapContentWidth(),
+
+                            shape = RoundedCornerShape(12.dp)
 
 
                         ) {
-
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                            ) {
                                 Text(
                                     text = "Order Now",
                                     style = TextStyle(
@@ -344,11 +430,20 @@ fun OrderNowCard(
                                         textAlign = TextAlign.Center,
                                         fontWeight = FontWeight(500),
                                         lineHeight = 16.sp,
-                                    ),
+                                        letterSpacing = 0.5.sp,
+                                        ),
 
 
                                     )
-                            }
+
+                                Spacer(modifier = Modifier.width(8.dp))
+
+                                Icon(
+                                    imageVector = Icons.Default.ArrowRightAlt ,
+                                    contentDescription = "null",
+                                    modifier = Modifier.size(16.dp)
+                                )
+
 
 
                         }
@@ -387,14 +482,21 @@ fun RestaurantCard(
                 .fillMaxWidth() //inherits width from parent Column i.e 328.dp
                 .clip(RoundedCornerShape(16.dp))
         ){
-            Image(
-                painter = painterResource(drawable),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxSize()
+            Box(
+                contentAlignment = Alignment.TopEnd
+            ) {
+                Image(
+                    painter = painterResource(drawable),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxSize()
 
-            )
+                )
+
+                FavouriteButton()
+
+            }
         }
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -509,6 +611,31 @@ fun RestaurantCard(
         }
     }
 
+}
+
+@Composable
+fun FavouriteButton(
+    modifier: Modifier = Modifier,
+    color: Color = Color.White
+){
+    var isFavourite by remember {
+        mutableStateOf(false)
+    }
+
+    IconToggleButton(
+        checked = isFavourite,
+        onCheckedChange ={isFavourite = !isFavourite}
+    ) {
+       Icon(
+           tint = color,
+           imageVector = if (isFavourite){
+               Icons.Filled.Favorite
+           }else{
+               Icons.Default.FavoriteBorder
+           },
+           contentDescription = "favorite icon"
+       )
+    }
 }
 
 @Composable
@@ -636,28 +763,44 @@ fun HomeSection(
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier){
-    Column(
+    LazyColumn(
         modifier
             .padding(horizontal = 16.dp, vertical = 10.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Search()
-        ChipSort(
-            R.string.homeChip1,
-            R.string.homeChip2,
-            R.string.homeChip3,
-        )
-        ComponentPairRow()
-        OrderNowCard(
-            Modifier.height(136.dp),
-            R.drawable.img8_food
-        )
-        HomeSection(title = R.string.SlotTitle) {
-            RestaurantCardColumn()
+        item {
+            Search()
+        }
+        item {
+            ChipSort(
+                R.string.homeChip1,
+                R.string.homeChip2,
+                R.string.homeChip3,
+                R.string.homeChip4,
+                R.string.homeChip5,
+                R.string.homeChip6,
+
+            )
+        }
+        item {
+            ComponentPairRow()
+        }
+        item {
+            OrderNowCard(
+                Modifier.height(136.dp),
+                R.drawable.img8_food
+            )
+        }
+        item {
+            HomeSection(title = R.string.SlotTitle) {
+                RestaurantCardColumn()
+            }
         }
 
-        HomeSection(title = R.string.SlotTitle2) {
-            RecentlyViewedRow()
+        item {
+            HomeSection(title = R.string.SlotTitle2) {
+                RecentlyViewedRow()
+            }
         }
     }
 }
@@ -807,6 +950,14 @@ data class DrawableStringPair(
     @DrawableRes val drawable: Int,
     @StringRes val text: Int,
 )
+
+@Preview
+@Composable
+fun FavouriteButtonPreview(){
+    MunchTheme{
+        FavouriteButton()
+    }
+}
 
 //@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 //@Composable
