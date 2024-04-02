@@ -1,6 +1,9 @@
-package com.example.munch
+                                                                     package com.example.munch
 
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.drawable.Icon
+import android.os.Build.VERSION_CODES.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -80,9 +83,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.munch.ui.theme.MunchTheme
-
-
-class MainActivity : ComponentActivity() {
+import org.w3c.dom.Text
+import java.time.format.TextStyle
+                                                                     class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
